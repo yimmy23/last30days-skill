@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.8.3] - 2026-06-25
+
 ### Added
 
 - Free Reddit gets dedicated-subreddit lanes: entity-home subs (e.g. r/Kanye for "Kanye West", via the new `--dedicated-subreddits` flag) are pulled in full from top+hot+new listings and exempt from the relevance floor, since the whole sub is the topic. Fixes the over-aggressive floor that dropped on-topic posts whose titles lacked the entity name.
