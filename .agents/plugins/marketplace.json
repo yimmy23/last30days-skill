@@ -1,7 +1,7 @@
 {
   "name": "last30days-skill",
   "interface": {
-    "displayName": "Last 30 Days"
+    "displayName": "last30days"
   },
   "plugins": [
     {
