@@ -43,7 +43,7 @@ def test_non_modal_completion_mentions_safe_diagnose_and_project_trust():
 
 def _step0_search_contract() -> str:
     text = SKILL_MD.read_text(encoding="utf-8")
-    start_marker = "**STEP 0 - RESOLVE HOST-NATIVE SEARCH FIRST.**"
+    start_marker = "**STEP 0 - RESOLVE HOST WEB SEARCH FIRST.**"
     end_marker = "**FIRST-RUN GATE"
     start = text.find(start_marker)
     assert start != -1, f"missing section marker: {start_marker}"
@@ -52,18 +52,18 @@ def _step0_search_contract() -> str:
     return text[start:end]
 
 
-def test_codex_native_search_does_not_require_deferred_websearch_schema():
+def test_host_web_search_uses_available_capability_not_specific_tool_name():
     step0 = _step0_search_contract()
-    assert "Claude Code with deferred WebSearch" in step0
-    assert "ToolSearch select:WebSearch" in step0
-    assert "Codex / Gemini / hosts with a native web-search tool already exposed" in step0
-    assert "Do **not** treat a failed or empty `ToolSearch select:WebSearch` lookup as fatal" in step0
-    assert "Codex" in step0 and "native web search" in step0
+    assert "usable web-search tool" in step0
+    assert "built in, exposed as a deferred tool, or provided by an installed connector" in step0
+    assert "Brave, Firecrawl, Exa, Serper" in step0
+    assert "If your host requires loading, selecting, or enabling the web-search tool" in step0
+    assert "Do not fail the skill just because one particular schema lookup or tool name is unavailable" in step0
 
 
-def test_no_native_search_hosts_use_auto_resolve_and_leave_native_signal_unset():
+def test_no_host_search_uses_auto_resolve_and_leaves_native_signal_unset():
     step0 = _step0_search_contract()
-    assert "Hosts with no native web-search tool" in step0
+    assert "If no web-search tool is available in the agent session" in step0
     assert "--auto-resolve" in step0
     assert "LAST30DAYS_NATIVE_SEARCH=1" in step0
-    assert "Leave it unset on hosts without native search" in step0
+    assert "Leave it unset when the agent session has no web-search tool" in step0
