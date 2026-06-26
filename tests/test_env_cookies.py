@@ -114,7 +114,6 @@ class TestGetConfigCookieIntegration:
         from lib.env import get_config, OpenAIAuth
         mock_openai.return_value = OpenAIAuth(
             token=None, source="none", status="missing",
-            account_id=None, codex_auth_file="/fake",
         )
         mock_extract.return_value = {"auth_token": "browser_tok", "ct0": "browser_ct0"}
         env_patch = {
@@ -139,7 +138,6 @@ class TestGetConfigCookieIntegration:
         from lib.env import get_config, OpenAIAuth
         mock_openai.return_value = OpenAIAuth(
             token=None, source="none", status="missing",
-            account_id=None, codex_auth_file="/fake",
         )
         mock_extract.return_value = {"auth_token": "browser_tok", "ct0": "browser_ct0"}
         env_patch = {
