@@ -87,6 +87,12 @@ jobs:
         env:
           GOPRIVATE: github.com/mvanhorn/*
           GOSUMDB: "off"
+          # printing-press v4.8.0 declares `go >= 1.26.3`, newer than the
+          # engine's pinned toolchain (mcp/go.mod). setup-go exports
+          # GOTOOLCHAIN=local, which would fail this install; override to auto
+          # for this step only so go fetches the toolchain PP needs. The MCP
+          # binary itself still builds on the pinned toolchain below.
+          GOTOOLCHAIN: auto
         run: go install github.com/mvanhorn/cli-printing-press/v4/cmd/printing-press@v4.8.0
 
       - name: Sync engine into vendored/
